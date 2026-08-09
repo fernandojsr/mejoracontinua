@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0e294c;
+    --ink:#0D131B;
     --panel:#161F2B;
     --panel-2:#1C2735;
     --border:#26374B;
@@ -434,6 +434,8 @@
     padding:24px 26px;
   }
   .template-text{
+    display:block;
+    width:100%;
     white-space:pre-line;
     font-family:'IBM Plex Mono', monospace;
     font-size:13.5px;
@@ -443,6 +445,16 @@
     border:1px solid var(--border);
     border-radius:8px;
     padding:18px 20px;
+    resize:vertical;
+    min-height:220px;
+    outline:none;
+  }
+  .template-text:focus{border-color:var(--amber);}
+  .template-hint{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--muted-2);
+    margin-top:10px;
   }
   .template-footer{
     display:flex; justify-content:flex-end;
@@ -828,8 +840,12 @@
       <p>Paste this into the Career Development &amp; Job Search project for every new role — fit analysis, ATS bullet selection, and cover letter draft, run against your Master Knowledge file.</p>
     </div>
     <div class="template-card">
-      <div class="template-text" id="template-text"></div>
-      <div class="template-footer"><button class="copy-btn" id="template-copy">Copy template</button></div>
+      <textarea class="template-text" id="template-text" spellcheck="false"></textarea>
+      <div class="template-hint">Type or paste your job details directly above, then copy.</div>
+      <div class="template-footer">
+        <button class="copy-btn" id="template-reset" style="margin-right:10px;">Reset template</button>
+        <button class="copy-btn" id="template-copy">Copy</button>
+      </div>
     </div>
   </section>
 
@@ -926,11 +942,12 @@ Here is the full Job Description:
 
 Please run the fit analysis, select ATS resume bullet points, and draft the cover letter based on my Master Knowledge file.`;
 
-  document.getElementById('template-text').textContent = templateText;
+  const templateEl = document.getElementById('template-text');
+  templateEl.value = templateText;
 
   document.getElementById('template-copy').addEventListener('click', () => {
     const btn = document.getElementById('template-copy');
-    navigator.clipboard.writeText(templateText).then(() => {
+    navigator.clipboard.writeText(templateEl.value).then(() => {
       const original = btn.textContent;
       btn.textContent = 'Copied';
       btn.classList.add('copied');
@@ -939,6 +956,11 @@ Please run the fit analysis, select ATS resume bullet points, and draft the cove
         btn.classList.remove('copied');
       }, 1500);
     });
+  });
+
+  document.getElementById('template-reset').addEventListener('click', () => {
+    templateEl.value = templateText;
+    templateEl.focus();
   });
 
   // ===== About section =====
