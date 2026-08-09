@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Plan — 90-Day Career Transition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D131B;
+    --panel:#161F2B;
+    --panel-2:#1C2735;
+    --border:#26374B;
+    --amber:#E8A33D;
+    --amber-dim:#B9822F;
+    --teal:#4FB6A8;
+    --teal-dim:#3A8B81;
+    --text:#EDEFF2;
+    --muted:#8B96A8;
+    --muted-2:#5E6B7E;
+    --success:#6FCF97;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(232,163,61,0.07), transparent 60%),
+      radial-gradient(1000px 500px at 100% 10%, rgba(79,182,168,0.06), transparent 55%),
+      var(--ink);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; margin:0; letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--amber);}
+
+  /* ===== HEADER / HERO ===== */
+  header{
+    padding:64px 0 40px;
+    border-bottom:1px solid var(--border);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    color:var(--amber);
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px;height:8px;
+    background:var(--amber);
+    border-radius:50%;
+    box-shadow:0 0 10px var(--amber);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+  h1.title{
+    font-size:clamp(30px, 5vw, 48px);
+    font-weight:700;
+    max-width:820px;
+  }
+  .subtitle{
+    color:var(--muted);
+    font-size:17px;
+    max-width:620px;
+    margin-top:14px;
+  }
+
+  /* Flight route strip */
+  .route{
+    margin-top:40px;
+    display:flex;
+    align-items:center;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow-x:auto;
+  }
+  .route-stop{
+    flex:1;
+    min-width:140px;
+    padding:18px 20px;
+    position:relative;
+    border-right:1px solid var(--border);
+  }
+  .route-stop:last-child{border-right:none;}
+  .route-stop.next{background:rgba(232,163,61,0.08);}
+  .route-code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--muted-2);
+    letter-spacing:0.05em;
+  }
+  .route-stop.next .route-code{color:var(--amber);}
+  .route-label{
+    font-weight:600;
+    font-size:14.5px;
+    margin-top:4px;
+  }
+  .route-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted-2);
+    margin-top:6px;
+  }
+  .route-stop.next .route-tag{color:var(--amber); font-weight:600;}
+  .route-arrow{
+    color:var(--muted-2);
+    font-size:16px;
+    padding:0 4px;
+    flex:0 0 auto;
+  }
+
+  section{padding:56px 0;}
+  .section-head{margin-bottom:28px;}
+  .section-head h2{font-size:26px; font-weight:600;}
+  .section-head p{color:var(--muted); margin-top:8px; font-size:15px; max-width:640px;}
+
+  /* ===== TRACKS ===== */
+  .tracks{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .track-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px;
+    border-top:3px solid var(--track-color, var(--amber));
+  }
+  .track-card.a{--track-color:var(--teal);}
+  .track-card.b{--track-color:var(--amber);}
+  .track-kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--track-color);
+    margin-bottom:8px;
+  }
+  .track-card h3{font-size:19px; margin-bottom:8px;}
+  .track-card p{color:var(--muted); font-size:14.5px; margin:0;}
+
+  /* ===== TIMELINE ===== */
+  .timeline{position:relative; padding-left:2px;}
+  .phase{
+    display:grid;
+    grid-template-columns:88px 1fr;
+    gap:20px;
+    position:relative;
+    padding-bottom:36px;
+  }
+  .phase:last-child{padding-bottom:0;}
+  .phase-marker{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .phase-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink);
+    background:var(--amber);
+    width:34px; height:34px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:600;
+    flex:0 0 auto;
+    z-index:1;
+  }
+  .phase-line{
+    width:2px;
+    flex:1;
+    background:var(--border);
+    margin-top:4px;
+  }
+  .phase:last-child .phase-line{display:none;}
+  .phase-body{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px 22px;
+  }
+  .phase-weeks{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--amber);
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .phase-title{font-size:18px; font-weight:600; margin-top:4px;}
+  .phase-items{list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .phase-items li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    color:var(--text);
+    cursor:pointer;
+  }
+  .chk{
+    flex:0 0 auto;
+    width:18px; height:18px;
+    border:1.5px solid var(--muted-2);
+    border-radius:4px;
+    margin-top:2px;
+    display:flex; align-items:center; justify-content:center;
+    transition:all .15s ease;
+  }
+  .chk svg{width:11px; height:11px; opacity:0; transition:opacity .15s ease;}
+  li.done .chk{background:var(--success); border-color:var(--success);}
+  li.done .chk svg{opacity:1;}
+  li.done span.label{color:var(--muted); text-decoration:line-through; text-decoration-color:var(--muted-2);}
+
+  .progress-wrap{margin-top:16px;}
+  .progress-track{height:5px; background:var(--panel-2); border-radius:4px; overflow:hidden;}
+  .progress-fill{height:100%; background:linear-gradient(90deg, var(--teal), var(--amber)); width:0%; transition:width .3s ease;}
+  .progress-label{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted-2); margin-top:6px;}
+
+  /* ===== PLATFORMS ===== */
+  .platform-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:16px;
+  }
+  .platform-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+  }
+  .platform-head{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+  .platform-mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:14px;
+    width:36px; height:36px;
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--panel-2);
+    color:var(--amber);
+    border:1px solid var(--border);
+  }
+  .platform-card h3{font-size:16px;}
+  .platform-tag{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em;}
+  .platform-card ul{margin:0; padding-left:18px; font-size:13.8px; color:var(--muted); display:flex; flex-direction:column; gap:6px;}
+  .platform-card ul li::marker{color:var(--teal);}
+
+  /* ===== ROLES ===== */
+  .roles-cols{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .role-block h3{font-size:15px; margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block;}
+  .dot.go{background:var(--success);}
+  .dot.no{background:#E36767;}
+  .pill-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    font-size:13.5px;
+    padding:8px 14px;
+    border-radius:100px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--text);
+  }
+  .role-block.avoid .pill{color:var(--muted); border-style:dashed;}
+
+  /* ===== HEADLINES ===== */
+  .lang-tabs{display:flex; gap:8px; margin-bottom:18px;}
+  .lang-tab{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    padding:8px 16px;
+    border-radius:100px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--muted);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .lang-tab.active{background:var(--amber); color:var(--ink); border-color:var(--amber); font-weight:600;}
+  .headline-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .headline-card.active{display:flex;}
+  .headline-text{font-size:16.5px; font-weight:500; max-width:760px;}
+  .copy-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:9px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    flex:0 0 auto;
+    transition:all .15s ease;
+  }
+  .copy-btn:hover{border-color:var(--amber); color:var(--amber);}
+  .copy-btn.copied{background:var(--success); color:var(--ink); border-color:var(--success);}
+
+  footer{
+    padding:40px 0 60px;
+    border-top:1px solid var(--border);
+    color:var(--muted-2);
+    font-size:13px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ===== BADGES ===== */
+  .badge{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    font-weight:600;
+    padding:2px 7px;
+    border-radius:4px;
+    flex:0 0 auto;
+    margin-top:3px;
+  }
+  .badge.job{background:rgba(79,182,168,0.14); color:var(--teal);}
+  .badge.lang{background:rgba(232,163,61,0.14); color:var(--amber);}
+
+  /* ===== WEEKLY RHYTHM ===== */
+  .rhythm-note{
+    display:flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--muted);
+    margin-bottom:18px;
+  }
+  .rhythm-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:10px;
+  }
+  .rhythm-day{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px 10px;
+    text-align:center;
+    border-top:3px solid var(--type-color, var(--teal));
+  }
+  .rhythm-day.job{--type-color:var(--teal);}
+  .rhythm-day.lang{--type-color:var(--amber);}
+  .rhythm-day-name{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em;}
+  .rhythm-day-type{font-size:13px; font-weight:600; margin-top:6px; line-height:1.3;}
+  .rhythm-day-hours{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted); margin-top:6px;}
+  .rhythm-legend{display:flex; gap:20px; margin-top:16px; font-size:13px; color:var(--muted);}
+  .rhythm-legend span{display:flex; align-items:center; gap:7px;}
+  .legend-dot{width:9px; height:9px; border-radius:50%;}
+  .legend-dot.job{background:var(--teal);}
+  .legend-dot.lang{background:var(--amber);}
+
+  /* ===== ABOUT SECTION ===== */
+  .about-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    display:none;
+  }
+  .about-card.active{display:block;}
+  .about-text{
+    white-space:pre-line;
+    font-size:14.5px;
+    color:var(--text);
+    line-height:1.7;
+    max-width:720px;
+  }
+  .about-footer{
+    display:flex; justify-content:flex-end;
+    margin-top:18px;
+  }
+
+  @media (max-width:700px){
+    .rhythm-grid{grid-template-columns:repeat(3, 1fr);}
+  }
+
+  @media (max-width:700px){
+    .tracks, .roles-cols{grid-template-columns:1fr;}
+    .phase{grid-template-columns:56px 1fr; gap:12px;}
+    .phase-num{width:28px;height:28px;font-size:11px;}
+    .route{flex-direction:column;}
+    .route-stop{border-right:none; border-bottom:1px solid var(--border); width:100%;}
+    .route-arrow{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Flight plan · active</div>
+    <h1 class="title">90-Day Career Transition — Bavaria to Next Role</h1>
+    <p class="subtitle">Two tracks running in parallel: fast online income, and a targeted push into Digital Transformation / IT Project Management roles across the DACH region.</p>
+
+    <div class="route">
+      <div class="route-stop">
+        <div class="route-code mono">MX</div>
+        <div class="route-label">Mexico</div>
+        <div class="route-tag">IT · Ops · Teaching</div>
+      </div>
+      <div class="route-arrow">→</div>
+      <div class="route-stop">
+        <div class="route-code mono">PT</div>
+        <div class="route-label">Portugal</div>
+        <div class="route-tag">Web Specialist</div>
+      </div>
+      <div class="route-arrow">→</div>
+      <div class="route-stop">
+        <div class="route-code mono">DE</div>
+        <div class="route-label">Germany</div>
+        <div class="route-tag">2023 – present</div>
+      </div>
+      <div class="route-arrow">→</div>
+      <div class="route-stop next">
+        <div class="route-code mono">???</div>
+        <div class="route-label">Next role</div>
+        <div class="route-tag">Boarding · Day 1–90</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="tracks">
+    <div class="section-head">
+      <h2>The two tracks</h2>
+      <p>Run at the same time — Track A reduces physical strain and builds income fast; Track B is the longer campaign toward a Project Manager role.</p>
+    </div>
+    <div class="tracks">
+      <div class="track-card a">
+        <div class="track-kicker">Track A · Now</div>
+        <h3>Online / part-time / Minijob</h3>
+        <p>Tutoring, freelance IT support, e-learning content. Goal: reduce physical work fast, build a recent "digital work" paper trail.</p>
+      </div>
+      <div class="track-card b">
+        <div class="track-kicker">Track B · 3–6 months</div>
+        <h3>Project Manager, DACH or abroad</h3>
+        <p>Digital Transformation / IT PM positioning, certification, structured applications across EURES, Xing, Stepstone.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="rhythm">
+    <div class="section-head">
+      <h2>Weekly rhythm</h2>
+      <p>6 working days, 4 free hours each. Split evenly across the week rather than blocked, so German keeps momentum and job search stays active every few days.</p>
+    </div>
+    <div class="rhythm-note">4 hrs / day · 24 hrs / week total</div>
+    <div class="rhythm-grid">
+      <div class="rhythm-day job">
+        <div class="rhythm-day-name">Mon</div>
+        <div class="rhythm-day-type">Job search</div>
+        <div class="rhythm-day-hours">4h</div>
+      </div>
+      <div class="rhythm-day lang">
+        <div class="rhythm-day-name">Tue</div>
+        <div class="rhythm-day-type">German + App</div>
+        <div class="rhythm-day-hours">4h</div>
+      </div>
+      <div class="rhythm-day job">
+        <div class="rhythm-day-name">Wed</div>
+        <div class="rhythm-day-type">Job search</div>
+        <div class="rhythm-day-hours">4h</div>
+      </div>
+      <div class="rhythm-day lang">
+        <div class="rhythm-day-name">Thu</div>
+        <div class="rhythm-day-type">German + App</div>
+        <div class="rhythm-day-hours">4h</div>
+      </div>
+      <div class="rhythm-day job">
+        <div class="rhythm-day-name">Fri</div>
+        <div class="rhythm-day-type">Job search</div>
+        <div class="rhythm-day-hours">4h</div>
+      </div>
+      <div class="rhythm-day lang">
+        <div class="rhythm-day-name">Sat</div>
+        <div class="rhythm-day-type">German + App</div>
+        <div class="rhythm-day-hours">4h</div>
+      </div>
+    </div>
+    <div class="rhythm-legend">
+      <span><span class="legend-dot job"></span> Job search — applications, profiles, tutoring, outreach</span>
+      <span><span class="legend-dot lang"></span> German study + German Studio app</span>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="section-head">
+      <h2>90-day timeline</h2>
+      <p>Click any item to check it off. Progress is tracked per phase.</p>
+    </div>
+
+    <div class="timeline" id="timeline-root">
+      <!-- Phase 1 -->
+      <div class="phase">
+        <div class="phase-marker">
+          <div class="phase-num">01</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-weeks">Weeks 1–2</div>
+          <div class="phase-title">Foundation</div>
+          <ul class="phase-items">
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Finalize resume in EN / DE / ES</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Enroll in PRINCE2 Foundation or Scrum/PSM course</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Set up / align profiles: LinkedIn, Xing, EURES/Europass, Indeed, Stepstone</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Register on Preply / iTalki for tutoring</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Set daily/alternate-day German routine (course + app practice)</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Scope remaining features/backlog for German Studio app</span></li>
+          </ul>
+          <div class="progress-wrap">
+            <div class="progress-track"><div class="progress-fill"></div></div>
+            <div class="progress-label">0 / 4 complete</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase">
+        <div class="phase-marker">
+          <div class="phase-num">02</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-weeks">Weeks 3–6</div>
+          <div class="phase-title">Track A launch + Track B groundwork</div>
+          <ul class="phase-items">
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Start tutoring sessions (aim 5–10 hrs/week within job-search days)</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Apply to 5–8 freelance IT/e-learning gigs weekly (Malt, Upwork)</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Apply to 3–5 PM / Digital Transformation roles weekly (Xing, Stepstone)</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Set EURES + LinkedIn alerts for target titles across DACH</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Keep consistent German study on every scheduled day — no skipped sessions</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Build core features of German Studio app</span></li>
+          </ul>
+          <div class="progress-wrap">
+            <div class="progress-track"><div class="progress-fill"></div></div>
+            <div class="progress-label">0 / 4 complete</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase">
+        <div class="phase-marker">
+          <div class="phase-num">03</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-weeks">Weeks 7–10</div>
+          <div class="phase-title">Scale and certify</div>
+          <ul class="phase-items">
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Finish PM certification, add to all profiles</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Increase Track A hours if traction is good</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Raise Track B applications to 8–10/week, include EU-wide EURES listings</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Direct outreach: message 3–5 recruiters/hiring managers weekly</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Push toward next German level (aim for a concrete milestone, e.g. B1/B2 checkpoint)</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Finish and test German Studio app end-to-end</span></li>
+          </ul>
+          <div class="progress-wrap">
+            <div class="progress-track"><div class="progress-fill"></div></div>
+            <div class="progress-label">0 / 4 complete</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="phase">
+        <div class="phase-marker">
+          <div class="phase-num">04</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-weeks">Weeks 11–13</div>
+          <div class="phase-title">Review and adjust</div>
+          <ul class="phase-items">
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Assess whether Track A income allows reducing physical work further</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Review Track B response rate — revisit framing if low</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Recalibrate effort toward whichever track shows traction</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Consolidate German level — consider booking a certificate exam</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Ship German Studio app and use it as a daily practice tool</span></li>
+          </ul>
+          <div class="progress-wrap">
+            <div class="progress-track"><div class="progress-fill"></div></div>
+            <div class="progress-label">0 / 3 complete</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="platforms">
+    <div class="section-head">
+      <h2>Platform-specific tactics</h2>
+      <p>Same story everywhere, different mechanics per platform.</p>
+    </div>
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-head">
+          <div class="platform-mark">Li</div>
+          <div>
+            <h3>LinkedIn</h3>
+            <div class="platform-tag">Primary / global</div>
+          </div>
+        </div>
+        <ul>
+          <li>Set "Open to Work" tags: Project Manager, IT Coordinator, Digital Transformation Consultant, Training &amp; Development</li>
+          <li>Lead About section with the transformation story, not a chronological list</li>
+          <li>Turn on remote + part-time filters in job search settings</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-head">
+          <div class="platform-mark">EU</div>
+          <div>
+            <h3>EURES</h3>
+            <div class="platform-tag">Relocation track</div>
+          </div>
+        </div>
+        <ul>
+          <li>Create a Europass profile and publish it directly to the EURES portal</li>
+          <li>Book a session with an EURES adviser for relocation + matching support</li>
+          <li>Best for Track B (relocation), less useful for remote-only search</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-head">
+          <div class="platform-mark">Xi</div>
+          <div>
+            <h3>Xing</h3>
+            <div class="platform-tag">DACH / Mittelstand</div>
+          </div>
+        </div>
+        <ul>
+          <li>Complete the German-language profile fully — signals local commitment</li>
+          <li>Trusted by recruiters at mid-size German firms more than LinkedIn</li>
+          <li>Use "Home Office" and "Teilzeit" filters in Stellenmarkt</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-head">
+          <div class="platform-mark">In</div>
+          <div>
+            <h3>Indeed &amp; Stepstone</h3>
+            <div class="platform-tag">Volume + Minijob</div>
+          </div>
+        </div>
+        <ul>
+          <li>Best for volume and Minijob/Teilzeit listings specifically</li>
+          <li>Save searches in German too: Projektmanager, Digitale Transformation, IT-Koordinator</li>
+          <li>Add "Homeoffice" and "Minijob" as explicit saved-search terms</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-head">
+          <div class="platform-mark">Rm</div>
+          <div>
+            <h3>Remote boards</h3>
+            <div class="platform-tag">Arbeitnow · Jobgether · Working Nomads</div>
+          </div>
+        </div>
+        <ul>
+          <li>Arbeitnow tracks 100% remote German roles and flags Minijob/Werkstudent listings</li>
+          <li>Jobgether curates remote roles specifically for senior/experienced professionals</li>
+          <li>Working Nomads / EU Remote Jobs / NoDesk for a wider European net</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-head">
+          <div class="platform-mark">Tu</div>
+          <div>
+            <h3>Tutoring</h3>
+            <div class="platform-tag">Preply · iTalki</div>
+          </div>
+        </div>
+        <ul>
+          <li>Fastest to start — can go live within days</li>
+          <li>Leverages 14 years of lecturing experience directly</li>
+          <li>Good short-term bridge while Track B ramps up</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="roles">
+    <div class="section-head">
+      <h2>Role targets</h2>
+      <p>Titles that map directly to how recruiters will read your background.</p>
+    </div>
+    <div class="roles-cols">
+      <div class="role-block">
+        <h3><span class="dot go"></span> Focus on</h3>
+        <div class="pill-list">
+          <div class="pill">Digital Transformation Consultant</div>
+          <div class="pill">IT Project Manager</div>
+          <div class="pill">Business / Corporate Trainer</div>
+          <div class="pill">E-Learning Coordinator</div>
+          <div class="pill">IT Operations / Implementation Manager</div>
+          <div class="pill">Trilingual Technical Project Coordinator</div>
+        </div>
+      </div>
+      <div class="role-block avoid">
+        <h3><span class="dot no"></span> Avoid</h3>
+        <div class="pill-list">
+          <div class="pill">Generic "IT Support"</div>
+          <div class="pill">Junior-titled roles</div>
+          <div class="pill">Roles with hard years-of-experience caps</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="headlines">
+    <div class="section-head">
+      <h2>LinkedIn headline</h2>
+      <p>Same positioning, localized per language. Tap a language, then copy.</p>
+    </div>
+
+    <div class="lang-tabs">
+      <div class="lang-tab active" data-lang="en">EN</div>
+      <div class="lang-tab" data-lang="de">DE</div>
+      <div class="lang-tab" data-lang="es">ES</div>
+    </div>
+
+    <div class="headline-card active" data-lang="en">
+      <div class="headline-text">Digital Transformation &amp; IT Project Management Leader | Strategy → Execution | Trilingual (ES/EN/DE) | Mexico · Portugal · Germany</div>
+      <button class="copy-btn">Copy</button>
+    </div>
+    <div class="headline-card" data-lang="de">
+      <div class="headline-text">Digitale Transformation &amp; IT-Projektmanagement Leiter | Strategie → Umsetzung | Dreisprachig (ES/EN/DE) | Mexiko · Portugal · Deutschland</div>
+      <button class="copy-btn">Copy</button>
+    </div>
+    <div class="headline-card" data-lang="es">
+      <div class="headline-text">Líder en Transformación Digital y Gestión de Proyectos de TI | Estrategia → Ejecución | Trilingüe (ES/EN/DE) | México · Portugal · Alemania</div>
+      <button class="copy-btn">Copy</button>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head">
+      <h2>About section</h2>
+      <p>Same story, one standard, localized per platform. Tap a language, then copy.</p>
+    </div>
+
+    <div class="lang-tabs" id="about-tabs">
+      <div class="lang-tab active" data-lang="en">EN</div>
+      <div class="lang-tab" data-lang="de">DE</div>
+      <div class="lang-tab" data-lang="es">ES</div>
+    </div>
+
+    <div class="about-card active" data-lang="en">
+      <div class="about-text" id="about-text-en"></div>
+      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
+    </div>
+    <div class="about-card" data-lang="de">
+      <div class="about-text" id="about-text-de"></div>
+      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
+    </div>
+    <div class="about-card" data-lang="es">
+      <div class="about-text" id="about-text-es"></div>
+      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
+    </div>
+  </section>
+
+  <footer>
+    Living document — check items off as you go. Nothing here is saved between visits, so treat it as a working checklist, not a database.
+  </footer>
+</div>
+
+<script>
+  // Checklist toggling + per-phase progress
+  document.querySelectorAll('.phase-body').forEach(phase => {
+    const items = phase.querySelectorAll('.phase-items li');
+    const fill = phase.querySelector('.progress-fill');
+    const label = phase.querySelector('.progress-label');
+
+    function update(){
+      const total = items.length;
+      const done = phase.querySelectorAll('.phase-items li.done').length;
+      const pct = total ? Math.round((done/total)*100) : 0;
+      fill.style.width = pct + '%';
+      label.textContent = done + ' / ' + total + ' complete';
+    }
+
+    items.forEach(li => {
+      li.addEventListener('click', () => {
+        li.classList.toggle('done');
+        update();
+      });
+    });
+
+    update();
+  });
+
+  // Language tabs for headlines (scoped to the headlines section)
+  document.querySelectorAll('#headlines .lang-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const lang = tab.dataset.lang;
+      document.querySelectorAll('#headlines .lang-tab').forEach(t => t.classList.toggle('active', t === tab));
+      document.querySelectorAll('.headline-card').forEach(c => c.classList.toggle('active', c.dataset.lang === lang));
+    });
+  });
+
+  // Copy buttons for headlines
+  document.querySelectorAll('.headline-card .copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.previousElementSibling.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  });
+
+  // ===== About section =====
+  const aboutText = {
+    en: `I help organizations turn strategy into execution — modernizing operations, leading digital transformation, and delivering complex programs at scale.
+
+With 25+ years of international experience across government IT, manufacturing, sales, and education, I specialize in aligning strategy, technology, and people to drive measurable results.
+
+My work focuses on:
+• Digital transformation
+• Project & Program Management
+• Operational excellence
+• Process optimization
+• Organizational change
+
+I've led cross-functional teams across multiple countries, helping organizations simplify complexity, improve performance, and build scalable operating models. Recently certified in AI Essentials, Data Analytics, Business Intelligence, and UX Design (Google) to stay current with the tools driving modern transformation work.
+
+🚀 Open to Operations Leadership, Digital Transformation, and Project/Program Management roles across the EU (remote/hybrid).
+🌍 Spanish | English | German
+📍 Bavaria, Germany · EU Citizen
+
+I'm not a consultant who studies operations. I'm the one who has had to run them.`,
+
+    de: `Ich helfe Unternehmen dabei, Strategie in Umsetzung zu verwandeln — durch die Modernisierung von Abläufen, die Steuerung digitaler Transformation und die Umsetzung komplexer Programme in großem Maßstab.
+
+Mit über 25 Jahren internationaler Erfahrung in IT im öffentlichen Sektor, Fertigung, Vertrieb und Bildung bringe ich Strategie, Technologie und Menschen zusammen, um messbare Ergebnisse zu erzielen.
+
+Meine Schwerpunkte:
+• Digitale Transformation
+• Projekt- & Programmmanagement
+• Operative Exzellenz
+• Prozessoptimierung
+• Organisatorischer Wandel
+
+Ich habe funktionsübergreifende Teams in mehreren Ländern geleitet und Unternehmen dabei geholfen, Komplexität zu reduzieren, die Leistung zu verbessern und skalierbare Betriebsmodelle aufzubauen. Kürzlich zertifiziert in AI Essentials, Data Analytics, Business Intelligence und UX Design (Google), um mit den Werkzeugen moderner Transformationsarbeit Schritt zu halten.
+
+🚀 Offen für Positionen in Operations Leadership, Digitaler Transformation sowie Projekt-/Programmmanagement in der gesamten EU (remote/hybrid).
+🌍 Spanisch | Englisch | Deutsch
+📍 Bayern, Deutschland · EU-Bürger
+
+Ich bin kein Berater, der Abläufe nur untersucht. Ich bin derjenige, der sie leiten musste.`,
+
+    es: `Ayudo a las organizaciones a convertir la estrategia en ejecución — modernizando operaciones, liderando la transformación digital y entregando programas complejos a gran escala.
+
+Con más de 25 años de experiencia internacional en TI del sector público, manufactura, ventas y educación, me especializo en alinear estrategia, tecnología y personas para lograr resultados medibles.
+
+Mi trabajo se centra en:
+• Transformación digital
+• Gestión de Proyectos y Programas
+• Excelencia operativa
+• Optimización de procesos
+• Cambio organizacional
+
+He liderado equipos multifuncionales en varios países, ayudando a las organizaciones a simplificar la complejidad, mejorar el rendimiento y construir modelos operativos escalables. Recientemente certificado en AI Essentials, Data Analytics, Business Intelligence y UX Design (Google) para mantenerme al día con las herramientas que impulsan la transformación digital actual.
+
+🚀 Abierto a roles de Liderazgo en Operaciones, Transformación Digital y Gestión de Proyectos/Programas en toda la UE (remoto/híbrido).
+🌍 Español | Inglés | Alemán
+📍 Baviera, Alemania · Ciudadano de la UE
+
+No soy un consultor que estudia las operaciones. Soy quien ha tenido que dirigirlas.`
+  };
+
+  Object.keys(aboutText).forEach(lang => {
+    const el = document.getElementById('about-text-' + lang);
+    if (el) el.textContent = aboutText[lang];
+  });
+
+  document.querySelectorAll('#about-tabs .lang-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const lang = tab.dataset.lang;
+      document.querySelectorAll('#about-tabs .lang-tab').forEach(t => t.classList.toggle('active', t === tab));
+      document.querySelectorAll('.about-card').forEach(c => c.classList.toggle('active', c.dataset.lang === lang));
+    });
+  });
+
+  document.querySelectorAll('.about-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.about-card');
+      const text = card.querySelector('.about-text').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
