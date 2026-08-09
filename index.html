@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0D131B;
+    --ink:#0e294c;
     --panel:#161F2B;
     --panel-2:#1C2735;
     --border:#26374B;
@@ -395,6 +395,60 @@
     .rhythm-grid{grid-template-columns:repeat(3, 1fr);}
   }
 
+  /* ===== QUICK LINKS ===== */
+  .quick-links{
+    margin-top:18px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .quick-link-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    font-weight:600;
+    text-decoration:none;
+    color:var(--ink);
+    background:var(--amber);
+    padding:11px 18px;
+    border-radius:8px;
+    border:1px solid var(--amber);
+    transition:all .15s ease;
+  }
+  .quick-link-btn:hover{background:var(--amber-dim); border-color:var(--amber-dim);}
+  .quick-link-btn.disabled{
+    background:var(--panel-2);
+    color:var(--muted-2);
+    border:1px dashed var(--border);
+    cursor:default;
+    pointer-events:none;
+  }
+
+  /* ===== TEMPLATE ===== */
+  .template-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .template-text{
+    white-space:pre-line;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    color:var(--text);
+    line-height:1.85;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:18px 20px;
+  }
+  .template-footer{
+    display:flex; justify-content:flex-end;
+    margin-top:16px;
+  }
+
   @media (max-width:700px){
     .tracks, .roles-cols{grid-template-columns:1fr;}
     .phase{grid-template-columns:56px 1fr; gap:12px;}
@@ -441,6 +495,10 @@
         <div class="route-label">Next role</div>
         <div class="route-tag">Boarding · Day 1–90</div>
       </div>
+    </div>
+
+    <div class="quick-links">
+      <a href="https://claude.ai/project/019fc7b7-fde7-749b-a472-73f18f140353" class="quick-link-btn" id="project-link" target="_blank" rel="noopener">↗ Career Development &amp; Job Search</a>
     </div>
   </header>
 
@@ -764,6 +822,17 @@
     </div>
   </section>
 
+  <section id="template">
+    <div class="section-head">
+      <h2>Job application template</h2>
+      <p>Paste this into the Career Development &amp; Job Search project for every new role — fit analysis, ATS bullet selection, and cover letter draft, run against your Master Knowledge file.</p>
+    </div>
+    <div class="template-card">
+      <div class="template-text" id="template-text"></div>
+      <div class="template-footer"><button class="copy-btn" id="template-copy">Copy template</button></div>
+    </div>
+  </section>
+
   <section id="about">
     <div class="section-head">
       <h2>About section</h2>
@@ -842,6 +911,33 @@
           btn.classList.remove('copied');
         }, 1500);
       });
+    });
+  });
+
+  // ===== Application template =====
+  const templateText =
+`Target Role: 
+Company Name: 
+Location/Type: 
+
+Here is the full Job Description:
+
+
+
+Please run the fit analysis, select ATS resume bullet points, and draft the cover letter based on my Master Knowledge file.`;
+
+  document.getElementById('template-text').textContent = templateText;
+
+  document.getElementById('template-copy').addEventListener('click', () => {
+    const btn = document.getElementById('template-copy');
+    navigator.clipboard.writeText(templateText).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1500);
     });
   });
 
