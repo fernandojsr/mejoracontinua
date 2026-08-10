@@ -1114,55 +1114,30 @@
     </div>
   </section>
 
-  <section id="tracker">
+  <section id="about">
     <div class="section-head">
-      <h2>Application tracker</h2>
-      <p>Log every application — role, date, where you applied, who you contacted, and current status.</p>
+      <h2>About section</h2>
+      <p>Same story, one standard, localized per platform. Tap a language, then copy.</p>
     </div>
 
-    <div class="tracker-stats" id="tracker-stats"></div>
-
-    <div class="tracker-form">
-      <div class="field">
-        <label>Date</label>
-        <input type="date" id="f-date">
-      </div>
-      <div class="field">
-        <label>Role</label>
-        <input type="text" id="f-role" placeholder="Project Manager">
-      </div>
-      <div class="field">
-        <label>Company</label>
-        <input type="text" id="f-company" placeholder="Company name">
-      </div>
-      <div class="field">
-        <label>Where</label>
-        <input type="text" id="f-where" placeholder="Xing, Stepstone…">
-      </div>
-      <div class="field">
-        <label>Who</label>
-        <input type="text" id="f-who" placeholder="Recruiter / contact">
-      </div>
-      <button class="tracker-add-btn" id="f-add">+ Add</button>
+    <div class="lang-tabs" id="about-tabs">
+      <div class="lang-tab active" data-lang="en">EN</div>
+      <div class="lang-tab" data-lang="de">DE</div>
+      <div class="lang-tab" data-lang="es">ES</div>
     </div>
 
-    <div class="tracker-table-wrap">
-      <table class="tracker-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Role</th>
-            <th>Company</th>
-            <th>Where</th>
-            <th>Who</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="tracker-body"></tbody>
-      </table>
+    <div class="about-card active" data-lang="en">
+      <div class="about-text" id="about-text-en"></div>
+      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
     </div>
-    <div class="tracker-note" id="tracker-status-note">Loading saved applications…</div>
+    <div class="about-card" data-lang="de">
+      <div class="about-text" id="about-text-de"></div>
+      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
+    </div>
+    <div class="about-card" data-lang="es">
+      <div class="about-text" id="about-text-es"></div>
+      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
+    </div>
   </section>
 
   <section id="tracker">
@@ -1244,32 +1219,6 @@
         <button class="copy-btn" id="template-reset" style="margin-right:10px;">Reset template</button>
         <button class="copy-btn" id="template-copy">Copy</button>
       </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="section-head">
-      <h2>About section</h2>
-      <p>Same story, one standard, localized per platform. Tap a language, then copy.</p>
-    </div>
-
-    <div class="lang-tabs" id="about-tabs">
-      <div class="lang-tab active" data-lang="en">EN</div>
-      <div class="lang-tab" data-lang="de">DE</div>
-      <div class="lang-tab" data-lang="es">ES</div>
-    </div>
-
-    <div class="about-card active" data-lang="en">
-      <div class="about-text" id="about-text-en"></div>
-      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
-    </div>
-    <div class="about-card" data-lang="de">
-      <div class="about-text" id="about-text-de"></div>
-      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
-    </div>
-    <div class="about-card" data-lang="es">
-      <div class="about-text" id="about-text-es"></div>
-      <div class="about-footer"><button class="copy-btn about-copy">Copy</button></div>
     </div>
   </section>
 
