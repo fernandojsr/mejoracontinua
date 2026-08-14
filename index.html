@@ -1143,7 +1143,7 @@
   <section id="tracker">
     <div class="section-head">
       <h2>Application tracker</h2>
-      <p>Log every application — date, role, company, platform, contact, and status. Saved privately to this page so it's there next time you open it.</p>
+      <p>Log every application — date, role, company, platform, contact, and status. Saved privately in this browser so it's there next time you open the page here.</p>
     </div>
 
     <div class="tracker-stats" id="tracker-stats"></div>
@@ -1234,8 +1234,8 @@
 
   async function loadChecklistState(){
     try{
-      const result = await window.storage.get(CHECKLIST_KEY, false);
-      checklistState = result && result.value ? JSON.parse(result.value) : {};
+      const raw = localStorage.getItem(CHECKLIST_KEY);
+      checklistState = raw ? JSON.parse(raw) : {};
     } catch(err){
       checklistState = {};
     }
@@ -1244,9 +1244,9 @@
 
   async function saveChecklistState(){
     try{
-      await window.storage.set(CHECKLIST_KEY, JSON.stringify(checklistState), false);
+      localStorage.setItem(CHECKLIST_KEY, JSON.stringify(checklistState));
     } catch(err){
-      // if saving fails, progress simply won't persist on refresh
+      // if saving fails (e.g. private browsing), progress simply won't persist on refresh
     }
   }
 
@@ -1410,9 +1410,9 @@
 
   async function loadApplications(){
     try{
-      const result = await window.storage.get(TRACKER_KEY, false);
-      applications = result && result.value ? JSON.parse(result.value) : [];
-      trackerNote.textContent = 'Saved privately — visible only to you on this page.';
+      const raw = localStorage.getItem(TRACKER_KEY);
+      applications = raw ? JSON.parse(raw) : [];
+      trackerNote.textContent = 'Saved privately in this browser — visible only to you on this device.';
     } catch(err){
       applications = [];
       trackerNote.textContent = 'Starting fresh — no saved applications found yet.';
@@ -1422,12 +1422,8 @@
 
   async function saveApplications(){
     try{
-      const result = await window.storage.set(TRACKER_KEY, JSON.stringify(applications), false);
-      if(!result){
-        trackerNote.textContent = 'Could not save — your last change may not persist.';
-      } else {
-        trackerNote.textContent = 'Saved privately — visible only to you on this page.';
-      }
+      localStorage.setItem(TRACKER_KEY, JSON.stringify(applications));
+      trackerNote.textContent = 'Saved privately in this browser — visible only to you on this device.';
     } catch(err){
       trackerNote.textContent = 'Could not save — your last change may not persist.';
     }
