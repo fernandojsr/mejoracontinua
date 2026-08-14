@@ -860,7 +860,7 @@
   <section id="timeline">
     <div class="section-head">
       <h2>90-day timeline</h2>
-      <p>Click any item to check it off. Progress is tracked per phase.</p>
+      <p>Click any item to check it off. Progress is tracked per phase and saved privately, so it's still there next time you open the page.</p>
     </div>
 
     <div class="timeline" id="timeline-root">
@@ -1228,29 +1228,63 @@
 </div>
 
 <script>
-  // Checklist toggling + per-phase progress
-  document.querySelectorAll('.phase-body').forEach(phase => {
+  // Checklist toggling + per-phase progress (persisted)
+  const CHECKLIST_KEY = 'checklist-progress';
+  let checklistState = {};
+
+  async function loadChecklistState(){
+    try{
+      const result = await window.storage.get(CHECKLIST_KEY, false);
+      checklistState = result && result.value ? JSON.parse(result.value) : {};
+    } catch(err){
+      checklistState = {};
+    }
+    applyChecklistState();
+  }
+
+  async function saveChecklistState(){
+    try{
+      await window.storage.set(CHECKLIST_KEY, JSON.stringify(checklistState), false);
+    } catch(err){
+      // if saving fails, progress simply won't persist on refresh
+    }
+  }
+
+  function applyChecklistState(){
+    document.querySelectorAll('.phase-items li').forEach(li => {
+      const id = li.dataset.itemId;
+      li.classList.toggle('done', !!checklistState[id]);
+    });
+    document.querySelectorAll('.phase-body').forEach(updatePhaseProgress);
+  }
+
+  function updatePhaseProgress(phase){
     const items = phase.querySelectorAll('.phase-items li');
     const fill = phase.querySelector('.progress-fill');
     const label = phase.querySelector('.progress-label');
+    const total = items.length;
+    const done = phase.querySelectorAll('.phase-items li.done').length;
+    const pct = total ? Math.round((done/total)*100) : 0;
+    fill.style.width = pct + '%';
+    label.textContent = done + ' / ' + total + ' complete';
+  }
 
-    function update(){
-      const total = items.length;
-      const done = phase.querySelectorAll('.phase-items li.done').length;
-      const pct = total ? Math.round((done/total)*100) : 0;
-      fill.style.width = pct + '%';
-      label.textContent = done + ' / ' + total + ' complete';
-    }
-
-    items.forEach(li => {
+  document.querySelectorAll('.phase-body').forEach((phase, phaseIdx) => {
+    const items = phase.querySelectorAll('.phase-items li');
+    items.forEach((li, itemIdx) => {
+      li.dataset.itemId = 'phase' + phaseIdx + '-item' + itemIdx;
       li.addEventListener('click', () => {
+        const id = li.dataset.itemId;
         li.classList.toggle('done');
-        update();
+        checklistState[id] = li.classList.contains('done');
+        saveChecklistState();
+        updatePhaseProgress(phase);
       });
     });
-
-    update();
+    updatePhaseProgress(phase);
   });
+
+  loadChecklistState();
 
   // Language tabs for headlines (scoped to the headlines section)
   document.querySelectorAll('#headlines .lang-tab').forEach(tab => {
