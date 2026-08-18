@@ -252,10 +252,12 @@
     color:var(--amber);
     border:1px solid var(--border);
   }
-  .platform-card h3{font-size:16px;}
+   .platform-card h3{font-size:16px;}
   .platform-tag{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em;}
   .platform-card ul{margin:0; padding-left:18px; font-size:13.8px; color:var(--muted); display:flex; flex-direction:column; gap:6px;}
   .platform-card ul li::marker{color:var(--teal);}
+  .platform-card ul.search-meta{margin-top:10px; padding-top:10px; border-top:1px dashed var(--border, #2a3442);}
+  .platform-card ul.search-meta strong{color:var(--fg, #e8edf4);}
 
   /* ===== ROLES ===== */
   .roles-cols{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
@@ -967,11 +969,11 @@
     </div>
     <div class="platform-grid">
 
-      <div class="platform-card">
+    <div class="platform-card">
         <div class="platform-head">
           <div class="platform-mark">Li</div>
           <div>
-             <h3>LinkedIn</h3>
+            <h3>LinkedIn</h3>
             <div class="platform-tag">Primary / global</div>
           </div>
         </div>
