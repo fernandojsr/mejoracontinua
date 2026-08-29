@@ -365,6 +365,7 @@
   }
   .rhythm-day.job{--type-color:var(--teal);}
   .rhythm-day.lang{--type-color:var(--amber);}
+  .rhythm-day.course{--type-color:#A9B6CC;}
   .rhythm-day-name{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em;}
   .rhythm-day-type{font-size:13px; font-weight:600; margin-top:6px; line-height:1.3;}
   .rhythm-day-hours{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted); margin-top:6px;}
@@ -373,6 +374,7 @@
   .legend-dot{width:9px; height:9px; border-radius:50%;}
   .legend-dot.job{background:var(--teal);}
   .legend-dot.lang{background:var(--amber);}
+  .legend-dot.course{background:#A9B6CC;}
 
   /* ===== ABOUT SECTION ===== */
   .about-card{
@@ -820,44 +822,45 @@
   <section id="rhythm">
     <div class="section-head">
       <h2>Weekly rhythm</h2>
-      <p>6 working days, 4 free hours each. Split evenly across the week rather than blocked, so German keeps momentum and job search stays active every few days.</p>
+      <p>6 working days, 5 free hours each, rotating across three tracks — Job search, German + App, and the Google PM Certificate — 2 days per track so each gets equal weekly weight.</p>
     </div>
-    <div class="rhythm-note">4 hrs / day · 24 hrs / week total</div>
+    <div class="rhythm-note">5 hrs / day · 30 hrs / week total · 10 hrs / track</div>
     <div class="rhythm-grid">
       <div class="rhythm-day job">
         <div class="rhythm-day-name">Mon</div>
         <div class="rhythm-day-type">Job search</div>
-        <div class="rhythm-day-hours">4h</div>
+        <div class="rhythm-day-hours">5h</div>
       </div>
       <div class="rhythm-day lang">
         <div class="rhythm-day-name">Tue</div>
         <div class="rhythm-day-type">German + App</div>
-        <div class="rhythm-day-hours">4h</div>
+        <div class="rhythm-day-hours">5h</div>
       </div>
-      <div class="rhythm-day job">
+      <div class="rhythm-day course">
         <div class="rhythm-day-name">Wed</div>
-        <div class="rhythm-day-type">Job search</div>
-        <div class="rhythm-day-hours">4h</div>
-      </div>
-      <div class="rhythm-day lang">
-        <div class="rhythm-day-name">Thu</div>
-        <div class="rhythm-day-type">German + App</div>
-        <div class="rhythm-day-hours">4h</div>
+        <div class="rhythm-day-type">PM Course</div>
+        <div class="rhythm-day-hours">5h</div>
       </div>
       <div class="rhythm-day job">
-        <div class="rhythm-day-name">Fri</div>
+        <div class="rhythm-day-name">Thu</div>
         <div class="rhythm-day-type">Job search</div>
-        <div class="rhythm-day-hours">4h</div>
+        <div class="rhythm-day-hours">5h</div>
       </div>
       <div class="rhythm-day lang">
-        <div class="rhythm-day-name">Sat</div>
+        <div class="rhythm-day-name">Fri</div>
         <div class="rhythm-day-type">German + App</div>
-        <div class="rhythm-day-hours">4h</div>
+        <div class="rhythm-day-hours">5h</div>
+      </div>
+      <div class="rhythm-day course">
+        <div class="rhythm-day-name">Sat</div>
+        <div class="rhythm-day-type">PM Course</div>
+        <div class="rhythm-day-hours">5h</div>
       </div>
     </div>
     <div class="rhythm-legend">
       <span><span class="legend-dot job"></span> Job search — applications, profiles, tutoring, outreach</span>
       <span><span class="legend-dot lang"></span> German study + German Studio app</span>
+      <span><span class="legend-dot course"></span> Google Project Management Certificate coursework</span>
     </div>
   </section>
 
@@ -875,14 +878,14 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-body">
-          <div class="phase-weeks">Weeks 1–2 (17 a 29 agosto 2026) </div>
+          <div class="phase-weeks">Weeks 1–2 (Sep 1–14, 2026) </div>
           <div class="phase-title">Foundation</div>
           <ul class="phase-items">
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Finalize resume in EN / DE / ES</span></li>
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge course">Course</span><span class="label">Complete <a href="https://www.pmi.org/learning/free-online-courses" target="_blank" rel="noopener">PMI Free Online Courses</a> — most recognized industry body; sets up a future PMP path</span></li>
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge course">Course</span><span class="label">Complete <a href="https://alison.com/course/project-management-fundamentals" target="_blank" rel="noopener">Alison: Project Management Fundamentals</a> — free certificate covering PMBOK, scheduling, risk, EVM</span></li>
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge course">Course</span><span class="label">Complete Atlassian University: Jira Fundamentals — free, builds tool credibility DACH employers look for</span></li>
-            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge course">Course</span><span class="label">Apply for Coursera financial aid and start Google Project Management Certificate — highest-value free credential</span></li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge course">Course</span><span class="label">Advance Google Project Management Certificate coursework (enrolled via Coursera financial aid) — highest-value free credential</span></li>
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Set up / align profiles: LinkedIn, Xing, EURES/Europass, Indeed, Stepstone</span></li>
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Register on Preply / iTalki for tutoring</span></li>
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge lang">DE</span><span class="label">Set daily/alternate-day German routine (course + app practice)</span></li>
@@ -890,7 +893,7 @@
           </ul>
           <div class="progress-wrap">
             <div class="progress-track"><div class="progress-fill"></div></div>
-            <div class="progress-label">0 / 4 complete</div>
+            <div class="progress-label">0 / 9 complete</div>
           </div>
         </div>
       </div>
@@ -902,7 +905,7 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-body">
-          <div class="phase-weeks">Weeks 3–6 (31 agosto a 26 septiembre 2026) </div>
+          <div class="phase-weeks">Weeks 3–6 (Sep 15 – Oct 12, 2026) </div>
           <div class="phase-title">Track A launch + Track B groundwork</div>
           <ul class="phase-items">
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Start tutoring sessions (aim 5–10 hrs/week within job-search days)</span></li>
@@ -914,7 +917,7 @@
           </ul>
           <div class="progress-wrap">
             <div class="progress-track"><div class="progress-fill"></div></div>
-            <div class="progress-label">0 / 4 complete</div>
+            <div class="progress-label">0 / 6 complete</div>
           </div>
         </div>
       </div>
@@ -926,7 +929,7 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-body">
-          <div class="phase-weeks">Weeks 7–10 (28 septiembre a 24 octubre 2026) </div>
+          <div class="phase-weeks">Weeks 7–10 (Oct 13 – Nov 9, 2026) </div>
           <div class="phase-title">Scale and certify</div>
           <ul class="phase-items">
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Finish PM certification, add to all profiles</span></li>
@@ -938,7 +941,7 @@
           </ul>
           <div class="progress-wrap">
             <div class="progress-track"><div class="progress-fill"></div></div>
-            <div class="progress-label">0 / 4 complete</div>
+            <div class="progress-label">0 / 6 complete</div>
           </div>
         </div>
       </div>
@@ -949,7 +952,7 @@
           <div class="phase-num">04</div>
         </div>
         <div class="phase-body">
-          <div class="phase-weeks">Weeks 11–13 (26 octubre a 14 noviembre 2026) </div>
+          <div class="phase-weeks">Weeks 11–13 (Nov 10–29, 2026) </div>
           <div class="phase-title">Review and adjust</div>
           <ul class="phase-items">
             <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#0D131B" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span><span class="badge job">Job</span><span class="label">Assess whether Track A income allows reducing physical work further</span></li>
@@ -960,7 +963,7 @@
           </ul>
           <div class="progress-wrap">
             <div class="progress-track"><div class="progress-fill"></div></div>
-            <div class="progress-label">0 / 3 complete</div>
+            <div class="progress-label">0 / 5 complete</div>
           </div>
         </div>
       </div>
