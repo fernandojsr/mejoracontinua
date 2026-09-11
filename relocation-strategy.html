@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relocation Strategy — DACH &amp; Spain</title>
+<style>
+  :root{
+    --navy-deep:#081521;
+    --navy:#0d2035;
+    --navy-panel:#122a44;
+    --navy-line:#1f3b5c;
+    --cyan:#3fd8e0;
+    --cyan-dim:#2a9aa3;
+    --ink:#e7eef4;
+    --ink-dim:#9fb4c7;
+    --ink-faint:#6c869c;
+    --amber:#e0a83f;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--navy-deep);
+    color:var(--ink);
+    font-family:"Inter","Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:"Space Grotesk","Inter",sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:var(--cyan);}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 64px;
+    border-bottom:1px solid var(--navy-line);
+    background:
+      radial-gradient(700px 320px at 82% -10%, rgba(63,216,224,0.14), transparent 60%),
+      var(--navy-deep);
+  }
+  .hero .kicker{
+    color:var(--cyan);
+    font-size:0.95rem;
+    font-weight:500;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(2rem,4.4vw,3rem);
+    color:var(--ink);
+    max-width:15ch;
+  }
+  .hero p{
+    color:var(--ink-dim);
+    max-width:62ch;
+    font-size:1.08rem;
+    margin-top:18px;
+  }
+  .hero .status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:28px;
+    padding:9px 16px;
+    border:1px solid var(--navy-line);
+    border-radius:999px;
+    font-size:0.9rem;
+    color:var(--ink-dim);
+  }
+  .hero .status .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--amber);
+    flex:none;
+  }
+
+  /* ---------- Criteria strip ---------- */
+  .criteria{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--navy-line);
+    border-top:1px solid var(--navy-line);
+    border-bottom:1px solid var(--navy-line);
+  }
+  .criteria div{
+    background:var(--navy);
+    padding:26px 22px;
+  }
+  .criteria .num{
+    color:var(--cyan);
+    font-size:0.82rem;
+    font-family:"Space Grotesk",sans-serif;
+  }
+  .criteria .label{
+    margin-top:8px;
+    font-size:1.02rem;
+    font-weight:600;
+  }
+  .criteria .desc{
+    margin-top:6px;
+    color:var(--ink-faint);
+    font-size:0.88rem;
+  }
+
+  /* ---------- Section shell ---------- */
+  section.block{
+    padding:70px 0 20px;
+  }
+  .block-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:34px;
+    border-bottom:1px solid var(--navy-line);
+    padding-bottom:20px;
+  }
+  .block-head h2{
+    font-size:1.7rem;
+    color:var(--ink);
+  }
+  .block-head .tag{
+    color:var(--ink-faint);
+    font-size:0.92rem;
+    white-space:nowrap;
+  }
+
+  /* ---------- City comparison table ---------- */
+  table.cities{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:44px;
+  }
+  table.cities th{
+    text-align:left;
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:600;
+    font-size:0.82rem;
+    color:var(--ink-faint);
+    padding:0 14px 12px 0;
+    border-bottom:1px solid var(--navy-line);
+  }
+  table.cities td{
+    padding:16px 14px 16px 0;
+    border-bottom:1px solid var(--navy-line);
+    vertical-align:top;
+    font-size:0.95rem;
+    color:var(--ink-dim);
+  }
+  table.cities td.city{
+    color:var(--ink);
+    font-weight:600;
+    white-space:nowrap;
+  }
+  table.cities tr.lead td.city{color:var(--cyan);}
+  table.cities td .pick{
+    display:inline-block;
+    margin-top:6px;
+    font-size:0.76rem;
+    color:var(--navy-deep);
+    background:var(--cyan);
+    padding:2px 8px;
+    border-radius:4px;
+    font-weight:600;
+  }
+
+  /* ---------- Satellite / company cards ---------- */
+  .subhead{
+    font-size:1.08rem;
+    color:var(--ink);
+    margin:0 0 18px;
+    padding-top:6px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-bottom:46px;
+  }
+  .card{
+    border:1px solid var(--navy-line);
+    background:var(--navy-panel);
+    border-radius:6px;
+    padding:20px 22px;
+  }
+  .card h4{
+    font-size:1.02rem;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .card h4 .dist{
+    font-size:0.76rem;
+    font-weight:500;
+    color:var(--cyan);
+    white-space:nowrap;
+  }
+  .card p{
+    margin:10px 0 0;
+    color:var(--ink-dim);
+    font-size:0.9rem;
+  }
+  .card .companies{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--navy-line);
+    font-size:0.84rem;
+    color:var(--ink-faint);
+  }
+  .card .companies strong{color:var(--ink-dim);font-weight:500;}
+
+  /* ---------- Highlight box ---------- */
+  .highlight{
+    border-left:3px solid var(--cyan);
+    background:var(--navy-panel);
+    padding:22px 24px;
+    border-radius:0 6px 6px 0;
+    margin-bottom:46px;
+  }
+  .highlight h4{
+    font-size:1.05rem;
+    color:var(--cyan);
+    margin-bottom:8px;
+  }
+  .highlight p{margin:0 0 8px;color:var(--ink-dim);font-size:0.94rem;}
+  .highlight p:last-child{margin-bottom:0;}
+
+  /* ---------- Verdict ---------- */
+  .verdict{
+    margin:70px 0 90px;
+    padding:36px 0 0;
+    border-top:1px solid var(--navy-line);
+  }
+  .verdict h2{font-size:1.6rem;margin-bottom:22px;}
+  .rank{
+    display:flex;
+    gap:18px;
+    padding:18px 0;
+    border-bottom:1px solid var(--navy-line);
+  }
+  .rank:last-child{border-bottom:none;}
+  .rank .n{
+    font-family:"Space Grotesk",sans-serif;
+    color:var(--cyan);
+    font-size:1.3rem;
+    width:28px;
+    flex:none;
+  }
+  .rank .t{color:var(--ink);font-weight:600;font-size:1rem;}
+  .rank .d{color:var(--ink-dim);font-size:0.92rem;margin-top:4px;}
+
+  /* ---------- Company directory ---------- */
+  .directory{
+    margin:70px 0 10px;
+    padding-top:8px;
+  }
+  .directory h2{font-size:1.6rem;margin-bottom:8px;}
+  .directory .sub{color:var(--ink-dim);font-size:0.95rem;margin-bottom:28px;max-width:60ch;}
+  .picker{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:stretch;
+    background:var(--navy-panel);
+    border:1px solid var(--navy-line);
+    border-radius:8px;
+    padding:20px;
+  }
+  .picker select{
+    flex:1 1 320px;
+    background:var(--navy-deep);
+    color:var(--ink);
+    border:1px solid var(--navy-line);
+    border-radius:6px;
+    padding:12px 14px;
+    font-family:"Inter",sans-serif;
+    font-size:0.95rem;
+    appearance:none;
+    background-image:linear-gradient(45deg, transparent 50%, var(--cyan) 50%), linear-gradient(135deg, var(--cyan) 50%, transparent 50%);
+    background-position: calc(100% - 22px) calc(1.15em), calc(100% - 16px) calc(1.15em);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat:no-repeat;
+  }
+  .picker select:focus{outline:2px solid var(--cyan);outline-offset:1px;}
+  .picker button{
+    flex:0 0 auto;
+    background:var(--cyan);
+    color:var(--navy-deep);
+    border:none;
+    border-radius:6px;
+    padding:0 22px;
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    cursor:pointer;
+  }
+  .picker button:hover{background:#5be3ea;}
+  .picker button:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+  .directory .note{
+    margin-top:12px;
+    color:var(--ink-faint);
+    font-size:0.82rem;
+  }
+
+  footer{
+    border-top:1px solid var(--navy-line);
+    padding:28px 0 60px;
+    color:var(--ink-faint);
+    font-size:0.82rem;
+  }
+
+  @media (max-width:720px){
+    .criteria{grid-template-columns:repeat(2,1fr);}
+    .grid{grid-template-columns:1fr;}
+    table.cities{font-size:0.85rem;}
+    .hero{padding:64px 0 48px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Career Plan — Relocation Exploration</div>
+    <h1>Where next, if the move ever happens</h1>
+    <p>A working comparison of DACH and Spanish cities against the job market, transport, cost of living, and language realities of my current search — plus the mid-size and satellite-city options in each region.</p>
+    <div class="status"><span class="dot"></span>Exploratory. No relocation planned before year end — timeline is finishing the Google PM Certification and building German in parallel.</div>
+  </div>
+</div>
+
+<div class="criteria">
+  <div>
+    <div class="num">01</div>
+    <div class="label">Job market depth</div>
+    <div class="desc">Volume of operations / digital-transformation / English-friendly roles.</div>
+  </div>
+  <div>
+    <div class="num">02</div>
+    <div class="label">Transport &amp; airport</div>
+    <div class="desc">Major international gateway, strong rail into the city core.</div>
+  </div>
+  <div>
+    <div class="num">03</div>
+    <div class="label">Cost of living</div>
+    <div class="desc">Rent pressure and general affordability against the same salary band.</div>
+  </div>
+  <div>
+    <div class="num">04</div>
+    <div class="label">Language demand</div>
+    <div class="desc">How much interview-level German a role realistically requires.</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ GERMANY ============ -->
+  <section class="block">
+    <div class="block-head">
+      <h2>Germany</h2>
+      <div class="tag">Primary DACH track</div>
+    </div>
+
+    <table class="cities">
+      <tr>
+        <th>City</th><th>Airport &amp; transport</th><th>Job market fit</th><th>Housing reality</th>
+      </tr>
+      <tr class="lead">
+        <td class="city">Frankfurt<div class="pick">Top pick</div></td>
+        <td>Germany's busiest airport (~63M pax, 300+ destinations), Lufthansa's main hub, plus a major rail hub with ICE connections nationwide.</td>
+        <td>Deepest English-friendly market: finance, consulting (Big Four), logistics/aviation, corporate ops.</td>
+        <td>2nd most expensive, but growth has slowed — one of the calmest of the Big 8 right now.</td>
+      </tr>
+      <tr>
+        <td class="city">Munich</td>
+        <td>2nd busiest airport, fastest-growing major hub, more pleasant to navigate than Frankfurt.</td>
+        <td>Strong corporate HQs (Siemens, Allianz, Infineon) plus a real digital-transformation scale-up scene (Celonis, Personio).</td>
+        <td>Most expensive rental market in Germany, ~0.3% practical vacancy.</td>
+      </tr>
+      <tr>
+        <td class="city">Berlin</td>
+        <td>Regional/European hub — strong for short-haul, weaker for long-haul than Frankfurt or Munich.</td>
+        <td>Most English-friendly work culture in the country, deep startup/remote-first scene.</td>
+        <td>Cheapest of the Big 8 core cities, but a segmented, competitive search for newcomers.</td>
+      </tr>
+      <tr>
+        <td class="city">Stuttgart / Hamburg / Cologne</td>
+        <td>Regional airports, good rail links.</td>
+        <td>Stuttgart: automotive/industrial (Mercedes, Bosch, Porsche) — good manufacturing fit. Hamburg: logistics/trade. Cologne: media/insurance.</td>
+        <td>Hamburg and Cologne both tightening fast (+5–6% YoY rent growth); Stuttgart calmer.</td>
+      </tr>
+    </table>
+
+    <h3 class="subhead">Satellite cities — their own job market, short drive to the major city</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Ingolstadt<span class="dist">~30 min to Munich</span></h4>
+        <p>Audi's home base plus Airbus Defence and Space. Lowest unemployment in Germany (~3%). Strong manufacturing/QA fit — mostly German-language roles.</p>
+        <div class="companies"><strong>Watch:</strong> Audi, Airbus DS</div>
+      </div>
+      <div class="card">
+        <h4>Darmstadt<span class="dist">~30 min to Frankfurt</span></h4>
+        <p>Genuine English-first hiring hub: ESA's ESOC (~800 staff) and Software AG (digital transformation software) both based here.</p>
+        <div class="companies"><strong>Watch:</strong> ESA/ESOC, Software AG, Serco (ESOC contractor)</div>
+      </div>
+      <div class="card">
+        <h4>Freising<span class="dist">next to Munich Airport</span></h4>
+        <p>Cheaper than Munich, university-town character, sits directly at the airport — pairs well with the transport priority.</p>
+        <div class="companies">Mainly a commuter base rather than its own employer hub.</div>
+      </div>
+      <div class="card">
+        <h4>Wiesbaden / Mainz / Offenbach<span class="dist">30–40 min to Frankfurt</span></h4>
+        <p>Mainz jumped from rank 55 to 7 in Germany's 2025 economic ranking; home to BioNTech and ZDF. Offenbach is closest and cheapest, with its own design/creative sector.</p>
+        <div class="companies"><strong>Watch:</strong> BioNTech (Mainz)</div>
+      </div>
+    </div>
+
+    <h3 class="subhead">Mid-size companies worth tracking</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Celonis <span class="dist">Munich</span></h4>
+        <p>Process-mining / digital-transformation scale-up. English is the working language. Currently posting Value Engineering and Process Intelligence consultant roles — including a Public Sector Transformation opening.</p>
+      </div>
+      <div class="card">
+        <h4>Personio <span class="dist">Munich</span></h4>
+        <p>HR-tech scale-up, English-first, teams from 60+ nationalities. Currently hiring Business Process Manager and Revenue Operations roles.</p>
+      </div>
+      <div class="card">
+        <h4>Techem / Fresenius <span class="dist">Frankfurt area</span></h4>
+        <p>Techem: building-services metering, strong ops/process focus. Fresenius: healthcare/medical device manufacturing, international culture.</p>
+      </div>
+      <div class="card">
+        <h4>Wacker Chemie / MTU Aero / KraussMaffei <span class="dist">Munich area</span></h4>
+        <p>Manufacturing and quality-management roles — direct echo of the Uriarte Talavera production/QA background. Mostly German-language.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPAIN ============ -->
+  <section class="block">
+    <div class="block-head">
+      <h2>Spain</h2>
+      <div class="tag">Secondary / lower-effort track</div>
+    </div>
+
+    <table class="cities">
+      <tr>
+        <th>City</th><th>Airport &amp; transport</th><th>Job market fit</th><th>Housing reality</th>
+      </tr>
+      <tr class="lead">
+        <td class="city">Madrid<div class="pick">Top pick</div></td>
+        <td>Spain's largest airport, 3rd busiest in the EU, 200+ destinations, key European gateway to Latin America.</td>
+        <td>Deepest market for consulting, corporate ops, finance, digital transformation — nearly every major multinational has its Spanish HQ here.</td>
+        <td>Mid-pack: cheaper than Barcelona, pricier than Valencia.</td>
+      </tr>
+      <tr>
+        <td class="city">Barcelona</td>
+        <td>5th busiest EU airport, strong European network, some recent operational strain (strikes, capacity).</td>
+        <td>Tech/deep-tech hub (22@ District), biotech and software-heavy — a narrower fit for a generalist ops profile than Madrid.</td>
+        <td>Priciest of the three.</td>
+      </tr>
+      <tr>
+        <td class="city">Valencia</td>
+        <td>Growing regional airport, well short of Madrid/Barcelona's global scale.</td>
+        <td>Smaller market overall, but the Castellón ceramics cluster nearby is a genuine industry match — see below.</td>
+        <td>Cheapest of the three by a wide margin (~25–35% under Madrid/Barcelona).</td>
+      </tr>
+    </table>
+
+    <div class="highlight">
+      <h4>Castellón ceramics cluster — the closest industry match anywhere in this whole search</h4>
+      <p>60–75km north of Valencia city. 80% of Spain's ceramic tile manufacturers are based here — ~60,000 jobs, over 20% of the province's GDP, and Spain is the world's second-largest tile exporter.</p>
+      <p>This lines up directly with the Uriarte Talavera background: production management, the QA department built from scratch, 5S implementation, raw-material standardization. Same industry, different ceramic tradition.</p>
+      <p><strong>Watch:</strong> Porcelanosa, Pamesa Cerámica, Keraben, Grupo STN, Torrecid, Esmalglass, Baldocer. Spanish is the working language here, which is a non-issue given native fluency — but this track sits closer to a return to manufacturing leadership than to the "digital transformation" positioning built for DACH.</p>
+    </div>
+
+    <h3 class="subhead">Satellite cities — their own job market, short drive to the major city</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Sant Cugat del Vallès<span class="dist">~20 min to Barcelona</span></h4>
+        <p>3,000+ SMEs and large companies, 65,000+ jobs. Strong health/biotech/pharma and IT cluster with real international names on-site.</p>
+        <div class="companies"><strong>Watch:</strong> Roche, Grifols, Boehringer Ingelheim, HP, Epson, GFT</div>
+      </div>
+      <div class="card">
+        <h4>Getafe / Alcalá de Henares<span class="dist">20–45 min to Madrid</span></h4>
+        <p>Getafe hosts an Airbus factory and a technology park (TECNOGETAFE). Alcalá has its own university and a 40+ company science park spanning IT, pharma, and industrial.</p>
+        <div class="companies"><strong>Watch:</strong> Airbus (Getafe), TECNOALCALÁ tenants</div>
+      </div>
+      <div class="card">
+        <h4>Paterna<span class="dist">~10 min to Valencia</span></h4>
+        <p>València Parc Tecnològic — 600+ companies, 15,000 professionals across biotech, IT, energy, and materials. A genuine tech ecosystem, not a bedroom suburb.</p>
+      </div>
+      <div class="card">
+        <h4>Almussafes<span class="dist">~20 min to Valencia</span></h4>
+        <p>Ford's largest manufacturing complex outside the US — 8,000 employees. Strong automotive supply chain, including Forvia-Faurecia (800+ local staff).</p>
+        <div class="companies"><strong>Watch:</strong> Ford España, Forvia-Faurecia</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="directory">
+    <h2>Company directory</h2>
+    <p class="sub">Every company mentioned above, grouped by city or region. Pick one and open its website directly.</p>
+    <div class="picker">
+      <select id="companySelect" aria-label="Select a company">
+        <optgroup label="Munich">
+          <option value="https://www.siemens.com">Siemens AG</option>
+          <option value="https://www.siemens-healthineers.com">Siemens Healthineers</option>
+          <option value="https://www.allianz.com">Allianz</option>
+          <option value="https://www.munichre.com">Munich Re</option>
+          <option value="https://www.bmwgroup.com">BMW Group</option>
+          <option value="https://www.infineon.com">Infineon Technologies</option>
+          <option value="https://www.celonis.com">Celonis</option>
+          <option value="https://www.personio.com">Personio</option>
+          <option value="https://www.wacker.com">Wacker Chemie</option>
+          <option value="https://www.mtu.de">MTU Aero Engines</option>
+          <option value="https://www.kraussmaffei.com">KraussMaffei</option>
+          <option value="https://www.draeger.com">Dräger</option>
+          <option value="https://www.capgemini.com">Capgemini</option>
+          <option value="https://www.accenture.com">Accenture</option>
+          <option value="https://www.deloitte.com">Deloitte Digital</option>
+        </optgroup>
+        <optgroup label="Frankfurt &amp; Rhine-Main">
+          <option value="https://www.db.com">Deutsche Bank</option>
+          <option value="https://www.commerzbank.de">Commerzbank</option>
+          <option value="https://www.dws.com">DWS Group</option>
+          <option value="https://www.ey.com">EY</option>
+          <option value="https://www.kpmg.com">KPMG</option>
+          <option value="https://www.pwc.com">PwC</option>
+          <option value="https://www.fraport.com">Fraport</option>
+          <option value="https://www.lufthansagroup.com">Lufthansa Group</option>
+          <option value="https://www.dhl.com">DHL / Deutsche Post</option>
+          <option value="https://www.sanofi.com">Sanofi</option>
+          <option value="https://www.deka.de">DekaBank</option>
+          <option value="https://www.flatexdegiro.com">flatexDEGIRO</option>
+          <option value="https://www.techem.com">Techem</option>
+          <option value="https://www.fresenius.com">Fresenius</option>
+          <option value="https://www.bbraun.com">B. Braun Melsungen</option>
+          <option value="https://www.dbschenker.com">DB Schenker</option>
+          <option value="https://www.kuehne-nagel.com">Kuehne+Nagel</option>
+          <option value="https://www.biontech.com">BioNTech (Mainz)</option>
+        </optgroup>
+        <optgroup label="Ingolstadt &amp; Darmstadt">
+          <option value="https://www.audi.com">Audi (Ingolstadt)</option>
+          <option value="https://www.airbus.com">Airbus Defence and Space (Ingolstadt)</option>
+          <option value="https://www.esa.int">ESA / ESOC (Darmstadt)</option>
+          <option value="https://www.softwareag.com">Software AG (Darmstadt)</option>
+          <option value="https://www.serco.com">Serco (ESOC contractor)</option>
+        </optgroup>
+        <optgroup label="Vienna">
+          <option value="https://www.omv.com">OMV</option>
+          <option value="https://www.erstegroup.com">Erste Group</option>
+          <option value="https://www.vig.com">Vienna Insurance Group</option>
+          <option value="https://www.redbull.com">Red Bull</option>
+          <option value="https://www.nestle.com">Nestlé Austria</option>
+          <option value="https://www.unilever.com">Unilever Austria</option>
+          <option value="https://www.ibm.com">IBM Austria</option>
+          <option value="https://www.boehringer-ingelheim.com">Boehringer Ingelheim RCV</option>
+          <option value="https://www.bitpanda.com">Bitpanda</option>
+          <option value="https://unvienna.org">UN Office at Vienna (UNOV)</option>
+          <option value="https://www.osce.org">OSCE</option>
+        </optgroup>
+        <optgroup label="Madrid &amp; satellites (Getafe, Alcalá)">
+          <option value="https://www.telefonica.com">Telefónica</option>
+          <option value="https://www.iairgroup.com">IAG / Iberia</option>
+          <option value="https://www.bbva.com">BBVA</option>
+          <option value="https://www.santander.com">Banco Santander</option>
+          <option value="https://www.quironsalud.es">Grupo Quirónsalud</option>
+          <option value="https://www.airbus.com">Airbus (Getafe)</option>
+          <option value="https://www.accenture.com">Accenture</option>
+          <option value="https://www.capgemini.com">Capgemini</option>
+          <option value="https://www.deloitte.com">Deloitte</option>
+          <option value="https://www.ey.com">EY</option>
+          <option value="https://www.kpmg.com">KPMG</option>
+          <option value="https://www.pwc.com">PwC</option>
+          <option value="https://www.iqvia.com">IQVIA</option>
+        </optgroup>
+        <optgroup label="Barcelona &amp; Sant Cugat">
+          <option value="https://www.roche.com">Roche</option>
+          <option value="https://www.grifols.com">Grifols</option>
+          <option value="https://www.boehringer-ingelheim.com">Boehringer Ingelheim</option>
+          <option value="https://www.hp.com">HP</option>
+          <option value="https://www.epson.com">Epson</option>
+          <option value="https://www.ricoh.com">Ricoh</option>
+          <option value="https://www.gft.com">GFT</option>
+          <option value="https://www.seat.com">Seat</option>
+          <option value="https://www.cupraofficial.com">Cupra</option>
+          <option value="https://www.accenture.com">Accenture</option>
+          <option value="https://www.capgemini.com">Capgemini</option>
+        </optgroup>
+        <optgroup label="Valencia, Castellón, Paterna &amp; Almussafes">
+          <option value="https://www.porcelanosa.com">Porcelanosa Grupo</option>
+          <option value="https://www.pamesa.com">Pamesa Cerámica</option>
+          <option value="https://www.keraben.com">Keraben Grupo</option>
+          <option value="https://www.stnceramica.es">Grupo STN</option>
+          <option value="https://www.torrecid.com">Torrecid</option>
+          <option value="https://www.baldocer.com">Baldocer</option>
+          <option value="https://www.ceramicasmyr.com">MYR Cerámica</option>
+          <option value="https://www.ford.es">Ford España (Almussafes)</option>
+          <option value="https://www.forvia.com">Forvia-Faurecia</option>
+        </optgroup>
+      </select>
+      <button type="button" onclick="var u=document.getElementById('companySelect').value; if(u){window.open(u,'_blank','noopener');}">Visit website</button>
+    </div>
+    <p class="note">Links go to each company's main site, not a specific job posting — openings change, so search their careers page directly once there.</p>
+  </div>
+
+  <div class="verdict">
+    <h2>Current standing, if it ever becomes a decision</h2>
+    <div class="rank">
+      <div class="n">1</div>
+      <div>
+        <div class="t">Frankfurt, Germany</div>
+        <div class="d">Best combination of transport, English-friendly job depth, and a calmer housing market than Munich. Darmstadt (ESOC, Software AG) sits 30 minutes out as a genuine plan B with no German requirement.</div>
+      </div>
+    </div>
+    <div class="rank">
+      <div class="n">2</div>
+      <div>
+        <div class="t">Madrid, Spain</div>
+        <div class="d">Deepest Spanish job market for this profile, best airport connectivity of the Spain options, and no language barrier at all. Lower search intensity than the German track for now.</div>
+      </div>
+    </div>
+    <div class="rank">
+      <div class="n">3</div>
+      <div>
+        <div class="t">Munich, Germany</div>
+        <div class="d">Strong employer base (Celonis, Personio, Siemens) but the tightest, most expensive housing market of anywhere considered.</div>
+      </div>
+    </div>
+    <div class="rank">
+      <div class="n">4</div>
+      <div>
+        <div class="t">Castellón / Valencia region, Spain</div>
+        <div class="d">Not a digital-transformation move — a direct return to ceramics manufacturing leadership, in Spanish, at genuine industrial scale. Worth keeping as a distinct third option rather than folding into the main ranking.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap">Fernando Sánchez-Rodríguez — Career Plan · Relocation exploration, last updated based on 2026 market research. Not a decision, a reference.</div>
+</footer>
+
+</body>
+</html>
